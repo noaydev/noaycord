@@ -2,7 +2,7 @@ import asyncio
 from .methods import *
 
 class Bot:
-    def __init__(self, *intents) -> None:
+    def __init__(self, intents) -> None:
         self.event_handlers = {}
         self.intents = []
         for intent in intents:

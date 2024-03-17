@@ -44,7 +44,6 @@ async def event_loop(token: str, bot, intents):
             intent_number |= intent.value
         else:
             intent_number |= intent
-    print(intent_number)
     # Establish connection
     async with websockets.connect(gateway_url) as ws:
         while True:

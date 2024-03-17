@@ -31,7 +31,7 @@ bot = discord.bot(discord.get_all_intents())
 to this:
 
 ```py
-bot = discord.bot(discord.Intents.guild_messages)
+bot = discord.bot([discord.Intents.guild_messages])
 ```
 This snippet allows the bot only to receive events about messages in servers. Here are all intents that the Discord API has: [List of Intents](https://discord.com/developers/docs/topics/gateway#list-of-intents). As of now, Noaycord doesn't support the AUTO_MODERATION_CONFIGURATION and AUTO_MODERATION_EXECUTION intents.
 

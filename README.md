@@ -2,6 +2,8 @@
 
 >Note that this README is designated for CS50x final project submission. The readme will be changed in the future to include less things and rely more on the docs
 
+#### VIDEO DEMO: <URL>
+#### DECRIPTION:
 Hello world, I'm Noay_dev and this is Noaycord. A wrapper for the Discord API that's written in Python. It's made as a final project for the CS50x course. After that I will continue updating it hopefully. As of now you have the ability to listen for message events. Nothing much really. I will guide you through how you can do some things with my not so good library.
 
 ## Installing and using the library

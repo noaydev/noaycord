@@ -4,6 +4,20 @@
 
 Hello world, I'm Noay_dev and this is Noaycord. A wrapper for the Discord API that's written in Python. It's made as a final project for the CS50x course. After that I will continue updating it hopefully. As of now you have the ability to listen for message events. Nothing much really. I will guide you through how you can do some things with my not so good library.
 
+## Installing and using the library
+
+For now, the only way to use the library is to install it manually. You can't install it through pip. The way to install the library is to download the latest release from [here](https://github.com/noaydev/noaycord/releases), unzip the source code and place the folder inside your working directory. It should look something like this
+```
+your-folder
+|
+|--noaycord
+|
+|--your-app.py
+|
+|____________
+```
+where noaycord is the library name. After submitting the project to CS50x I will upload it to PyPI (pip) and it will be installable from there. Way easier then all this.
+
 ## Hello world
 
 First here is an example program that prints out hello world when the bot goes online
@@ -86,3 +100,18 @@ msg.author.display_name
 msg.author.discriminator
 msg.content
 ```
+
+## Files in my project
+
+In the library there are multiple files that serve different purposes. Here all of them will be explained
+
+1. ```\_\_init\_\_.py``` - it tells Python which things to include when importing the library
+2. ```.gitignore``` - since this project is built with the help of git, I added a gitignore for git to ignore all files and folders that aren't necessary
+3. ```classes.py``` - it contains classes that represent things like Users, Messages, Channels, Servers and so on
+4. ```intents.py``` - it contains code for handling intents and contains all intents that the library supports
+5. ```methods.py``` - most of the stuff is there. It has things like Identifying, Heartbeats, the Event Loop and the Bot class
+6. ```README.md``` - the thing you're reading right now
+
+## Design choices
+
+When I first started making this, I had big design ideas in mind. When I actually got to making all of this, they kinda got behind me. Nonetheless, I present to you, a modern asynchronous Python library that is designed to be "the best there ever was".

@@ -101,6 +101,26 @@ msg.author.discriminator
 msg.content
 ```
 
+Also, you can now reply to messages using ```msg.reply()```. Here is an example:
+```py
+import noaycord as discord
+
+intents = [
+    discord.Intents.guild_messages,
+    discord.Intents.direct_messages
+]
+
+bot = discord.Bot(intents)
+
+@bot.on_message()
+def message(msg):
+    msg.reply('Hello world')
+
+bot.run('Token here')
+```
+
+> Note that this will cause the bot to get rate limited because it will send too many messages. It will reply to its own messages causing an infinite loop of sorts.
+
 ## Files in my project
 
 In the library there are multiple files that serve different purposes. Here all of them will be explained

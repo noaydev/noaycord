@@ -23,11 +23,13 @@ async def identify(websocket, token, intent_number):
     }
     await websocket.send(json.dumps(identify))
 
+seq_number = "null"
+
 async def heartbeat(websocket, heartbeat):
     while True:
         heartbeat_data = {
             "op": 1,
-            "d": "null"
+            "d": seq_number
         }
         await websocket.send(json.dumps(heartbeat_data))
         await asyncio.sleep(heartbeat / 1000)
@@ -53,5 +55,8 @@ async def event_loop(token: str, bot, intents):
             if response['op'] == 10:
                 asyncio.create_task(heartbeat(ws, response['d']['heartbeat_interval']))
                 asyncio.create_task(identify(ws, token, intent_number))
-            elif response['t'] == 'READY':
-                bot.on_ready(opt=f'{datetime.datetime.now().date()} {platform.system()}')
+            elif response['op'] == 0:
+                global seq_number
+                seq_number = int(response['s'])
+                if response['t'] == 'READY':
+                    bot.on_ready(opt=f'{datetime.datetime.now().date()} {platform.system()}')

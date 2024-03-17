@@ -7,6 +7,7 @@ import datetime
 from enum import Enum
 
 from .classes import User, Message
+from .http_handler import set_token
 
 api_url = r"https://discord.com/api/v10"
 
@@ -37,6 +38,7 @@ async def heartbeat(websocket, heartbeat):
         await asyncio.sleep(heartbeat / 1000)
 
 async def event_loop(token: str, bot, intents):
+    set_token(token)
     # Get the gateway url
     gateway_url = requests.get(api_url + '/gateway')
     gateway_url = gateway_url.json()
@@ -67,7 +69,8 @@ async def event_loop(token: str, bot, intents):
                     response['d']['author']['username'], response['d']['author']['global_name'], \
                     response['d']['author']['discriminator'])
                     
-                    message = Message(response['d']['id'], response['d']['channel_id'], user,\
+                    message = Message(response['d']['id'], response['d']['channel_id'],
+                    response['d']['guild_id'] ,user,\
                     response['d']['content'])
                     
                     bot.on_message(message, opt=f'{datetime.datetime.now().date()} {platform.system()}')

@@ -42,13 +42,47 @@ bot = discord.bot([discord.Intents.direct_message_reactions])
 ```
 The intent needs to be in a list because of how the library is designed.
 
-Also there is one thing you need to do before you can choose multiple intents at once. You have to make a list of all intents you want to use
-.
+Also there is one thing you need to do before you can choose multiple intents at once. You have to make a list of all intents you want to use.
 ```py
 intents = [
-    guild_messages,
-    direct_messages,
-    guild_message_typing
+    discord.Intents.guild_messages,
+    discord.Intents.direct_messages,
+    discord.Intents.guild_message_typing
 ]
 ```
 Then pass that intent list to the Bot() class
+
+```py
+bot = discord.bot(intents)
+```
+
+## Messages
+
+Recently added feature, messages. More exactly, message events. This allows our bot to receive messages if they have the guild_messages or direct_messages intents for Server Messages and DMs respectively. Here is how a simple bot that listens for when a message is send works.
+
+```py
+import noaycord as discord
+
+intents = [
+    discord.Intents.guild_messages,
+    discord.Intents.direct_messages
+]
+
+bot = discord.Bot(intents)
+
+@bot.on_message()
+def message(msg):
+    print('message received')
+
+bot.run('Token here')
+```
+You also have access to basic message's information. You can get the Message ID, Message's Channel ID, Author Information (id, username, display name, tag) and content by using these values respectively
+```py
+msg.id
+msg.channel_id
+msg.author.id
+msg.author.username
+msg.author.display_name
+msg.author.discriminator
+msg.content
+```

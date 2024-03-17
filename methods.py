@@ -4,6 +4,7 @@ import websockets
 import json
 import platform
 import datetime
+from enum import Enum
 
 api_url = r"https://discord.com/api/v10"
 
@@ -39,7 +40,11 @@ async def event_loop(token: str, bot, intents):
     # Calculate intent number
     intent_number = 0
     for intent in intents:
-        intent_number = intent_number | intent
+        if isinstance(intent, Enum):
+            intent_number |= intent.value
+        else:
+            intent_number |= intent
+    print(intent_number)
     # Establish connection
     async with websockets.connect(gateway_url) as ws:
         while True:

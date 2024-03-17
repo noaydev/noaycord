@@ -127,7 +127,7 @@ bot.run('Token here')
 
 In the library there are multiple files that serve different purposes. Here all of them will be explained
 
-1. ```\_\_init\_\_.py``` - it tells Python which things to include when importing the library
+1. ```__init__.py``` - it tells Python which things to include when importing the library
 2. ```.gitignore``` - since this project is built with the help of git, I added a gitignore for git to ignore all files and folders that aren't necessary
 3. ```classes.py``` - it contains classes that represent things like Users, Messages, Channels, Servers and so on
 4. ```intents.py``` - it contains code for handling intents and contains all intents that the library supports

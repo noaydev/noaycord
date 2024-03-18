@@ -1,12 +1,8 @@
-import asyncio
-import datetime
-import platform
-
 from .http_handler import send_request_post
 
 class User:
     def __init__(self, id: int, username: str, display_name: str, discriminator: str) -> None:
-        self.id = id
+        self.id = int(id)
         self.username = username
         self.display_name = display_name
         self.discriminator = discriminator
@@ -14,11 +10,11 @@ class User:
 
 class Message:
     def __init__(self, id: int, channel_id: int, guild_id: int, author: User, content: str) -> None:
-        self.id = id
-        self.channel_id = channel_id
+        self.id = int(id)
+        self.channel_id = int(channel_id)
         self.author = author
         self.content = content
-        self.guild_id = guild_id
+        self.guild_id = int(guild_id)
 
     def reply(self, message):
         message = {

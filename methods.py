@@ -4,6 +4,7 @@ import websockets
 import json
 import platform
 import datetime
+import inspect
 from enum import Enum
 
 from .classes import User, Message
@@ -70,7 +71,7 @@ async def event_loop(token: str, bot, intents):
                     response['d']['author']['discriminator'])
                     
                     message = Message(response['d']['id'], response['d']['channel_id'],
-                    response['d']['guild_id'] ,user,\
+                    response['d'].get('guild_id') ,user,\
                     response['d']['content'])
                     
                     bot.on_message(message, opt=f'{datetime.datetime.now().date()} {platform.system()}')
@@ -88,7 +89,10 @@ class Bot:
             quit(0)
     def on_ready(self, opt=None):
         def wrapper(func):
-            self.event_handlers['ready'] = func
+            if inspect.iscoroutinefunction(func):
+                self.event_handlers['ready'] = func
+            else:
+                raise TypeError(f'Event function must be asynchronous. Use async def {func.__name__}: instead of def {func.__name__}:.')
         if opt == f'{datetime.datetime.now().date()} {platform.system()}' \
         and self.event_handlers.get('ready') != None:
             asyncio.create_task(self.event_handlers['ready']())
@@ -96,7 +100,10 @@ class Bot:
         return wrapper
     def on_message(self, message=None, opt=None):
         def wrapper(func):
-            self.event_handlers['message'] = func
+            if inspect.iscoroutinefunction(func):
+                self.event_handlers['message'] = func
+            else:
+                raise TypeError(f'Event function must be asynchronous. Use async def {func.__name__}(): instead of def {func.__name__}():.')
         if opt == f'{datetime.datetime.now().date()} {platform.system()}' \
         and self.event_handlers.get('message') != None:
             asyncio.create_task(self.event_handlers['message'](message))

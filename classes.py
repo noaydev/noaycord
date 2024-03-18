@@ -1,4 +1,4 @@
-from .http_handler import send_request_post
+from .http_handler import send_request_post_json
 
 class User:
     def __init__(self, id: int, username: str, display_name: str, discriminator: str) -> None:
@@ -9,12 +9,12 @@ class User:
 
 
 class Message:
-    def __init__(self, id: int, channel_id: int, guild_id: int, author: User, content: str) -> None:
+    def __init__(self, id: int, channel_id: int, guild_id, author: User, content: str) -> None:
         self.id = int(id)
         self.channel_id = int(channel_id)
         self.author = author
         self.content = content
-        self.guild_id = int(guild_id)
+        self.guild_id = guild_id
 
     def reply(self, message):
         message = {
@@ -25,4 +25,4 @@ class Message:
                 "guild_id": int(self.guild_id)
             }
         }
-        send_request_post(f'/channels/{self.channel_id}/messages', message)
+        send_request_post_json(f'/channels/{self.channel_id}/messages', message)

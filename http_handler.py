@@ -8,7 +8,7 @@ def set_token(token: str):
     global TOKEN
     TOKEN = token
 
-def send_request_post(route, body):
+def send_request_post_json(route, body):
     headers = {
         "Authorization": f"Bot {TOKEN}",
         "Content-Type": "application/json"

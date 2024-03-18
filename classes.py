@@ -25,4 +25,5 @@ class Message:
                 "guild_id": int(self.guild_id)
             }
         }
+        print('got here')
         send_request_post_json(f'/channels/{self.channel_id}/messages', message)

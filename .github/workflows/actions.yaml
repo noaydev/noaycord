@@ -6,4 +6,4 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - run: ls
-      - run: python3 test.py
+      - run: python3 ${{ github.workspace }}/test.py

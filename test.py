@@ -1,1 +1,1 @@
-exit(1) # hi
+exit(1)

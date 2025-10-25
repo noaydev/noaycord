@@ -48,8 +48,22 @@ async def event_loop(bot, token):
             
             if response["t"] == "READY" and inspect.iscoroutinefunction(bot.event_handlers["on_ready"]):
                 bot_user = User(
-                    response["d"]["user"]["id"],
-                    response["d"]["user"]["username"]
+                    response["d"]["user"].get("id"),
+                    response["d"]["user"].get("username"),
+                    response["d"]["user"].get("global_name"),
+                    response["d"]["user"].get("discriminator"),
+                    response["d"]["user"].get("avatar"),
+                    response["d"]["user"].get("bot"),
+                    response["d"]["user"].get("system"),
+                    response["d"]["user"].get("mfa_enabled"),
+                    response["d"]["user"].get("banner"),
+                    response["d"]["user"].get("accent_color"),
+                    response["d"]["user"].get("locale"),
+                    response["d"]["user"].get("verified"),
+                    response["d"]["user"].get("email"),
+                    response["d"]["user"].get("flags"),
+                    response["d"]["user"].get("premium_type"),
+                    response["d"]["user"].get("public_flags"),
                 )
                 
                 bot.user = bot_user

@@ -6,28 +6,52 @@ from typing import Optional
 class User:
     id: int
     username: str
-    global_name: Optional[str] = None
+    display_name: Optional[str] = None
     discriminator: str = "0000"
     avatar: Optional[str] = None
-    bot: bool = False
-    system: bool = False
-    mfa_enabled: Optional[bool] = None
+    is_bot: bool = False
+    is_system: bool = False
+    is_mfa_enabled: Optional[bool] = None
     banner: Optional[str] = None
     accent_color: Optional[int] = None
     locale: Optional[str] = None
-    verified: Optional[bool] = None
+    is_verified: Optional[bool] = None
     email: Optional[str] = None
     flags: Optional[int] = 0
     premium_type: Optional[int] = 0
     public_flags: Optional[int] = 0
 
+@dataclass
+class Message:
+    id: int
+    channel_id: int
+    author: User
+    content: Optional[str]
+    timestamp: str
+    edited_timestamp: Optional[str]
+    is_tts: bool
+    mentions_everyone: bool
+    mentioned: Optional[list]
+    mentioned_roles: Optional[list]
+    mentioned_channels: Optional[list]
+    attachments: Optional[list]
+    embeds: Optional[list]
+    reactions: Optional[list]
+    nonce: str
+    is_pinned: bool
+    webhook_id: Optional[int]
+    message_type: int
+    
+
 # Needed so the code doesnt throw a circular import 
 from .gateway import event_loop
 class Bot():
     
-    def __init__(self, intents: list):
+    def __init__(self, *args):
         self.event_handlers = {}
-        self.intents = intents
+        self.intents = []
+        for i, intent in enumerate(args):
+            self.intents.append(intent)
         self.user: User
     
     def event(self, func):
